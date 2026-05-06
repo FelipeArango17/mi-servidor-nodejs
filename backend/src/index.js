@@ -1,6 +1,6 @@
-import 'dotenv/config'; // Carga las variables de .env automaticamente
 import express from 'express';
 import conectarDB from './config/db.js';
+import veterinaryRoutes from './routes/veterinaryRoutes.js';
 
 // Conectar base de datos
 conectarDB();
@@ -10,6 +10,9 @@ const PORT = 3000;
 
 // Middleaware para parsear JSON
 app.use(express.json());
+
+// Rutas
+app.use('/api/veterinarios', veterinaryRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
