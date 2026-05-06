@@ -1,5 +1,6 @@
 // Models
 
+import generateId from "../helpers/generateId";
 import mongoose from "mongoose";
 
 // Schema -> Definir estructura y reglas de los documentos que voy a guardar MongoDB
