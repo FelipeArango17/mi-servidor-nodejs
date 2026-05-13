@@ -22,16 +22,15 @@ const register = async (req, res) => {
         const veterinarioSave = await veterinario.save();
 
         // 4. Enviar respuesta de éxito y SALIR de la función
-        return res.json({
-            msg: 'Veterinario registrado correctamente',
-            data: veterinarioSave
+        return res.status(201).json({
+            msg: 'Usuario Registrado Correctamente',
+            veterinarySaved: veterinarioSave
         });
 
     } catch (error) {
         console.log("Error al guardar en MongoDB:", error);
         return res.status(500).json({ 
-            msg: 'Hubo un error al registrar',
-            error: error.message 
+            msg: 'Error al registrar usuario'
         });
     }
 };
@@ -41,6 +40,29 @@ const login = (req, res) => {
     res.json({ msg: 'Desde API/veterinarios/login'});
 };
 
+const confirm = async (req, res) => {
+    const { token } = req.params;
+
+    try {
+        const userConfirm = await Veterinary.findOne({ token });
+
+        if (!userConfirm) {
+            const error = new Error('Token no válido');
+            return res.status(404).json({ msg: error.message });
+        }
+
+        userConfirm.token = null;
+        userConfirm.confirm = true;
+        await userConfirm.save();
+
+        return res.json({ msg: 'Cuenta confirmada....' });
+
+    } catch (error) {
+        console.log("Error al confirmar cuenta:", error);
+        return res.status(500).json({ msg: 'Error al confirmar cuenta' });
+    }
+};
+
 const profile = (req, res) => {
     res.json({ msg: 'Desde API/veterinarios/profile' });
 };
@@ -48,5 +70,6 @@ const profile = (req, res) => {
 export {
     register,
     login,
+    confirm,
     profile
 };
