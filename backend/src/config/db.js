@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import mongoose from "mongoose";   
 
 const conectarDB = async () => { // Esperar respuesta de la conexion

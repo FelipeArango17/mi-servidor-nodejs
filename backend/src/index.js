@@ -1,6 +1,7 @@
 import express from 'express';
 import conectarDB from './config/db.js';
 import veterinaryRoutes from './routes/veterinaryRoutes.js';
+import 'dotenv/config';
 
 // Conectar base de datos
 conectarDB();

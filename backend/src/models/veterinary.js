@@ -1,6 +1,6 @@
 // Models
 
-import generateId from "../helpers/generateId";
+import generateId from "../helpers/generateId.js";
 import mongoose from "mongoose";
 
 // Schema -> Definir estructura y reglas de los documentos que voy a guardar MongoDB
@@ -30,13 +30,13 @@ const veterinarySchema = mongoose.Schema({
         type: String,
         default: null
     },
-    token: {
-        type: String,
-        default: null
-    },
     confirm: {
         type: Boolean,
         default: false
+    },
+    token: {
+        type: String,
+        default: generateId  // Mongoose lo llama como función al crear el documento
     }
 });
 
